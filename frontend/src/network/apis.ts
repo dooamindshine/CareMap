@@ -1,9 +1,16 @@
+import { UserSeverObjectPostRequest } from 'models/user_type';
 import { requests } from './requests';
 
-const getSessionRequest = async (id: number) => {
-  console.log(id)
+const getUserRequest = async () => {
   return requests
-    .get('/session').then((res) => res).catch((error) => console.log(error))
+    .get('/user').then((res: any) => res).catch((error: any) => console.log(error))
 };
 
-export const apis = { getSessionRequest };
+
+const createUserRequest = async (user: UserSeverObjectPostRequest) => {
+  return requests
+    .post('/user', {user}).then((res: any) => res).catch((error: any) => console.log(error))
+};
+
+
+export const apis = { createUserRequest, getUserRequest };

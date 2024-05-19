@@ -2,7 +2,7 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit';
 import createSagaMiddleware from '@redux-saga/core';
 import { persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import sessionReducer from './session';
+import sessionReducer from './user';
 import sagas from './sagas';
 
 const sagaMiddleware = createSagaMiddleware();

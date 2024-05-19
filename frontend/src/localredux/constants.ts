@@ -1,3 +1,4 @@
-export const SESSION = 'session';
+export const USER = 'user';
 
-export const GET_SESSION_ACTION = "session/getSessionData"
+export const GET_USER_ACTION = "USER/getUserData"
+export const CREATE_USER_ACTION = "USER/createUserData"
