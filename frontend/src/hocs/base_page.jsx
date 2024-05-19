@@ -1,15 +1,13 @@
+import CareHeader from "components/header";
 import React from "react";
 import { Background } from "styling/common";
 
-export interface BaseProps {}
-
-function withBase<P extends object>(
-  Component: React.ComponentType<P>
-): React.FC<P & BaseProps> {
-  const WrappedComponent: React.FC<P & BaseProps> = (props: BaseProps) => {
+function withBase(Component) {
+  const WrappedComponent = (props) => {
     return (
       <Background>
-        <Component {...(props as P)} />
+        <CareHeader/>
+        <Component {...props} />
       </Background>
     );
   };

@@ -41,14 +41,6 @@
     "eject": "react-scripts eject",
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,html}'"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app"
-    ],
-    "rules": {
-      "react/display-name": "off"
-    }
-  },
   "browserslist": {
     "production": [
       ">0.2%",

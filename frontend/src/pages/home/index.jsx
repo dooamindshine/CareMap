@@ -1,19 +1,20 @@
 import React, { useEffect } from 'react';
 import { LargeText } from '../../styling/common';
-import { useAppDispatch } from '../../localredux/hooks';
-import { getSessionData } from '../../localredux/user';
+import { getUserData } from '../../localredux/user';
 import withBase from 'hocs/base_page';
 import { HomeParent } from './styles';
 import { useNavigate } from 'react-router-dom';
 import Lottie from 'lottie-react';
 import loading from 'images/lotties/loading.json';
 import { AnimatePresence } from 'framer-motion';
+import { useDispatch } from 'react-redux';
 
-function SignUp() {
+function Home() {
   const navigation = useNavigate();
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getSessionData({ sessionId: 23, navigation }));
+    console.log("naother here")
+    dispatch(getUserData({ navigation }));
   });
 
   return (
@@ -32,4 +33,4 @@ function SignUp() {
   );
 }
 
-export default withBase(SignUp);
+export default withBase(Home);

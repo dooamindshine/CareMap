@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next';
-import { useAppDispatch } from 'localredux/hooks';
+import { useDispatch } from 'react-redux';
 
 export function useBaseProps() {
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   
 

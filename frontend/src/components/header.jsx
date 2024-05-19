@@ -1,35 +1,32 @@
 import React, { useEffect } from 'react';
-import { LargeText } from '../../styling/common';
-import { useAppDispatch } from '../../localredux/hooks';
-import { getUserData } from '../../localredux/user';
+import { LargeText } from '../styling/common';
 import withBase from 'hocs/base_page';
-import { HomeParent } from './styles';
+import { HeaderParent } from './styles';
 import { useNavigate } from 'react-router-dom';
 import Lottie from 'lottie-react';
 import loading from 'images/lotties/loading.json';
 import { AnimatePresence } from 'framer-motion';
+import { useDispatch } from 'react-redux';
+import { useBaseProps } from 'hocs/base_component';
 
-function Home() {
+function Header() {
   const navigation = useNavigate();
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(getUserData({ navigation }));
-  });
+  const dispatch = useDispatch();
+  const {t} = useBaseProps()
 
   return (
-    <HomeParent>
+    <HeaderParent>
       <AnimatePresence>
         <LargeText
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          Logging you in , Bitte warten
+          {t('home.logo')}
         </LargeText>
       </AnimatePresence>
-      <Lottie animationData={loading} loop={true} />
-    </HomeParent>
+    </HeaderParent>
   );
 }
 
-export default withBase(Home);
+export default Header;

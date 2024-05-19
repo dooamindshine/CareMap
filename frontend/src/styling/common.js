@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import Colors from "./color"
 
 const Background = styled.div`
   height: 100vh;
   min-height: 100vh;
-  background-color: red;
 `;
 
 const XLargeText = styled.div`
@@ -36,7 +36,7 @@ const SmallText = styled(motion.span)`
 
 const LargeText = styled(motion.span)`
   font-family: "Pacifico", cursive;
-  color: 10px;
+  color: ${Colors.rich_black};
   font-size: 30px;
   font-weight: 600;
 `;
