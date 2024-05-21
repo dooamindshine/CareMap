@@ -1,7 +1,23 @@
 {
-    "home": {
-      "heading": "Learn React",
-      "logo": "CareMap"
-    }
+  "home": {
+    "heading": "Learn React",
+    "logo": "CareMap"
+  },
+  "signup": {
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "age": "Age",
+    "gender": "Gender",
+    "children": "Number of Children",
+    "marital_status": "Marital Status",
+    "address": "Address",
+    "zip_code": "Zip Code",
+    "birthdate": "Birthdate",
+    "email": "Email",
+    "password": "password",
+    "telephone": "Telephone",
+    "create": "Create Account",
+    "submit": "Submit",
+    "already": "Already have an account? Sign in "
   }
-  
+}

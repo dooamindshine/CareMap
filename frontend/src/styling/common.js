@@ -1,50 +1,50 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import Colors from "./color"
+import Colors from "./color";
 
 const Background = styled.div`
   height: 100vh;
   min-height: 100vh;
 `;
 
-const XLargeText = styled.div`
-  font-family: "Sedan SC", serif;
-  color: blue;
-  font-size: 10px;
+const XLargeText = styled(motion.span)`
+  font-family: "Pacifico", cursive;
+  color: ${Colors.rich_black};
+  font-size: 24px;
   font-weight: 600;
 `;
 
-const RegularText = styled.div`
-  font-family: "Pacifico", cursive;
-  color: green;
+const WhiteHeading = styled(motion.span)`
+  font-family:"Encode Sans Expanded", sans-serif;
+  color: ${Colors.ghost_white};
+  font-size: 30px;
+  font-weight: 700;
+`;
+
+const RegularText = styled(motion.span)`
+  font-family: "Encode Sans Expanded", sans-serif;
+  color: ${(props) => props.$color};
   font-size: 16px;
-  line-spacing: 23px;
+  font-weight: 600;
 `;
 
 const XSmallText = styled.div`
-  font-family: "Pacifico", cursive;
+  font-family: "Cormorant Garamond", serif;
   color: green;
-  font-size: 20px;
-  line-spacing: 20px;
+  font-size: 8px;
 `;
 
 const SmallText = styled(motion.span)`
-  font-family: "Pacifico", cursive;
+  font-family: "Cormorant Garamond", serif;
   color: 10px;
-  font-size: 30px;
+  font-size: 12px;
 `;
 
 const LargeText = styled(motion.span)`
   font-family: "Pacifico", cursive;
   color: ${Colors.rich_black};
-  font-size: 30px;
+  font-size: 20px;
   font-weight: 600;
-`;
-
-const RegularIcon = styled.img`
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
 `;
 
 const CustomATag = styled(motion.a)`
@@ -57,7 +57,6 @@ const Bold = styled.span`
 
 export {
   RegularText,
-  RegularIcon,
   Background,
   CustomATag,
   XSmallText,
@@ -65,4 +64,5 @@ export {
   SmallText,
   XLargeText,
   Bold,
+  WhiteHeading
 };
