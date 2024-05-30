@@ -30,7 +30,7 @@ function OptionGroup(props) {
               </RegularText>
             </FieldLabelTextParent>
           </FieldParent>
-          <Select>
+          <Select name={props.name} onChange={handleChange}>
             {props.list.map((item) => {
               return <option value={item}>{item}</option>;
             })}

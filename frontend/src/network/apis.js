@@ -1,15 +1,29 @@
-import { requests } from './requests';
+import { requests } from "./requests";
 
-const getUserRequest = async () => {
+const getUserProfile = async (email, token) => {
   return requests
-    .get('/user').then((res) => res).catch((error) => console.log(error))
+    .get("/api/profile?email=" + email, {
+      headers: {
+        Authorization: "Bearer " + token,
+        email: email,
+      },
+    })
+    .then((res) => res)
+    .catch((error) => error.response);
 };
-
 
 const createUserRequest = async (user) => {
   return requests
-    .post('/user', {user}).then((res) => res).catch((error) => console.log(error))
+    .post("/api/users", { user })
+    .then((res) => res)
+    .catch((error) => error.response);
 };
 
+const signInUserRequest = async (user) => {
+  return requests
+    .post("/api/signin", { user })
+    .then((res) => res)
+    .catch((error) => error.response);
+};
 
-export const apis = { createUserRequest, getUserRequest };
+export const apis = { signInUserRequest, createUserRequest, getUserProfile };

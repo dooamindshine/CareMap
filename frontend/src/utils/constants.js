@@ -1,7 +1,10 @@
+export const TOKEN = "TOKEN";
+export const EMAIL = "EMAIL";
+
 export const InputType = {
-  text: 'text',
-  checkbox: 'checkbox',
-  radio: 'radiobutton',
+  text: "text",
+  checkbox: "checkbox",
+  radio: "radiobutton",
 };
 
 export const InitialAnimationYD = {
@@ -56,22 +59,22 @@ export const ExitAnimationO = {
 export const transitionTop = {
   duration: 0.4,
   delay: 0.1,
-  ease: 'easeIn',
-  type: 'tween',
+  ease: "easeIn",
+  type: "tween",
 };
 
 export const transitionInput = {
   duration: 0.4,
   delay: 0.5,
-  ease: 'easeIn',
-  type: 'tween',
+  ease: "easeIn",
+  type: "tween",
 };
 
 export const transitionStandard = {
   duration: 0.9,
   delay: 0.5,
-  ease: 'easeIn',
-  type: 'spring',
+  ease: "easeIn",
+  type: "spring",
 };
 
 export const ulAnimation = {
@@ -90,12 +93,47 @@ export const liAnimation = {
   show: { opacity: 1 },
 };
 
-export const buttonAnimationTransition = { type: 'spring', stiffness: 400, damping: 10 };
+export const buttonAnimationTransition = {
+  type: "spring",
+  stiffness: 400,
+  damping: 10,
+};
 export const buttonAnimationTap = { scale: 1 };
 export const buttonAnimationHover = {
   scale: 1.02,
 };
 export const buttonAnimationHoverCircle = {
-    scale: 1.1,
-  };
-  
+  scale: 1.1,
+};
+
+export const optionsSuccessSnackbar = {
+  position: "bottom-right",
+  style: {
+    backgroundColor: "midnightblue",
+    border: "2px solid lightgreen",
+    color: "lightblue",
+    fontFamily: "Menlo, monospace",
+    fontSize: "20px",
+    textAlign: "center",
+  },
+  closeStyle: {
+    color: "lightcoral",
+    fontSize: "16px",
+  },
+};
+
+export const optionsFailureSnackbar = {
+  position: "bottom-right",
+  style: {
+    backgroundColor: "midnightblue",
+    border: "2px solid lightgreen",
+    color: "lightblue",
+    fontFamily: "Menlo, monospace",
+    fontSize: "20px",
+    textAlign: "center",
+  },
+  closeStyle: {
+    color: "lightcoral",
+    fontSize: "16px",
+  },
+};

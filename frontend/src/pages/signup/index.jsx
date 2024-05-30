@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { LargeText, WhiteHeading, XLargeText } from "../../styling/common";
+import {
+  CustomATag,
+  LargeText,
+  RegularText,
+  WhiteHeading,
+  XLargeText,
+} from "../../styling/common";
 import { createUserData } from "../../localredux/user";
 import withBase from "hocs/base_page";
 import {
@@ -38,12 +44,17 @@ import { useBaseProps } from "hocs/base_component";
 import OptionGroup from "components/option_group";
 import { motion, useScroll, useSpring } from "framer-motion";
 import Button from "components/custom_button";
+import { useCookies } from "react-cookie";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Colors from "../../styling/color";
 
 function SignUp() {
   const { t } = useBaseProps();
   const navigation = useNavigate();
   const dispatch = useDispatch();
   const [inputs, setInputs] = useState({});
+  const [cookies, setCookie] = useCookies(["token", "email"]);
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -52,21 +63,17 @@ function SignUp() {
     restDelta: 0.001,
   });
 
-  const handleChange = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    setInputs((values) => ({ ...values, [name]: value }));
-  };
-
-  const handleSubmit = (event) => {
+  const createUser = (event) => {
     event.preventDefault();
-    alert(inputs);
+    //console.log(inputs);
+    const user = { ...inputs };
+    dispatch(createUserData({ user, setCookie, navigation, showError }));
   };
+  const notifyAccountCreationFail = (text) => toast(text);
 
-  useEffect(() => {
-    //dispatch(getSessionData({ sessionId: 23, navigation }));
-  });
-
+  const showError = (text) => {
+    notifyAccountCreationFail(text);
+  };
   return (
     <SignUpParent>
       <AnimatePresence>
@@ -80,6 +87,11 @@ function SignUp() {
         <Right style={{ scaleX }}>
           <HeadingMargin>
             <WhiteHeading>{t("signup.create")}</WhiteHeading>
+            <CustomATag href="/signin">
+              <RegularText $color={Colors.ghost_white}>
+                {t("signup.already")}
+              </RegularText>
+            </CustomATag>
           </HeadingMargin>
           <InputMargin>
             <CustomInput
@@ -99,6 +111,16 @@ function SignUp() {
               setInputs={setInputs}
               label={t("signup.last_name")}
               type="text"
+            />
+          </InputMargin>
+          <InputMargin>
+            <CustomInput
+              name={"birthdate"}
+              icon={faBirthdayCake}
+              inputs={inputs}
+              setInputs={setInputs}
+              label={t("signup.birthdate")}
+              type="date"
             />
           </InputMargin>
           <InputMargin>
@@ -181,17 +203,7 @@ function SignUp() {
               type="text"
             />
           </InputMargin>
-          <InputMargin>
-            <CustomInput
-              name={"birthdate"}
-              icon={faBirthdayCake}
-              inputs={inputs}
-              setInputs={setInputs}
-              label={t("signup.birthdate")}
-              type="date"
-            />
-          </InputMargin>
-          <Button label={t("signup.submit")} onClick={() => {}}></Button>
+          <Button label={t("signup.submit")} onClick={createUser}></Button>
         </Right>
       </AnimatePresence>
     </SignUpParent>

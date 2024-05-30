@@ -19,5 +19,12 @@
     "create": "Create Account",
     "submit": "Submit",
     "already": "Already have an account? Sign in "
+  },
+  "signin": {
+    "email": "Email",
+    "password": "password",
+    "signin": "Sign In",
+    "submit": "Submit",
+    "dont": "Don't have an account ? Create Account"
   }
 }

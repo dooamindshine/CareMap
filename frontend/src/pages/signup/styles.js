@@ -40,6 +40,9 @@ const InputMargin = styled(motion.div)`
 `;
 
 const HeadingMargin = styled(motion.div)`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
   margin-bottom: 25px;
   margin-top: 25px;
   margin-right: 25px;
