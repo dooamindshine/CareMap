@@ -23,9 +23,11 @@ const signInUser = async function (req, res) {
         const jwtToken = jwt.sign({ email }, process.env.JWT_SECRET, {
           expiresIn: "5h",
         });
-        return res
-          .status(200)
-          .json({ token: jwtToken, message: "Sign in success", user });
+        return res.status(200).json({
+          token: jwtToken,
+          message: "Sign in success",
+          user,
+        });
       } else {
         return res.status(401).json({ message: "Sign in failed" });
       }

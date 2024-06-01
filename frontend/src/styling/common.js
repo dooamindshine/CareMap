@@ -15,10 +15,14 @@ const XLargeText = styled(motion.span)`
 `;
 
 const WhiteHeading = styled(motion.span)`
-  font-family:"Encode Sans Expanded", sans-serif;
+  font-family: "Encode Sans Expanded", sans-serif;
   color: ${Colors.ghost_white};
   font-size: 30px;
   font-weight: 700;
+  @media screen and (max-width: 700px) {
+    font-size: 20px;
+    font-weight: 600;
+  }
 `;
 
 const RegularText = styled(motion.span)`
@@ -64,5 +68,5 @@ export {
   SmallText,
   XLargeText,
   Bold,
-  WhiteHeading
+  WhiteHeading,
 };

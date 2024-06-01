@@ -1,14 +1,15 @@
 import { call, delay, put } from "redux-saga/effects";
 import { apis } from "network/apis";
-import { TOKEN } from "utils/constants";
+import { EMAIL, TOKEN, USERID } from "utils/constants";
 import { setUserData } from "./index";
 
 export function* getUserData(action) {
-  const { email, token, showError, showSuccess } = action.payload;
-  const result = yield call(apis.getUserProfile, email, token);
+  const { email, token, showError, userid, setCookie } =
+    action.payload;
+  const result = yield call(apis.getUserProfile, email, userid, token);
+  console.log(result);
   if (result.status == 200) {
-    yield put(setUserData(result.response.data.user));
-    showSuccess()
+    yield put(setUserData(result.data.user));
   } else {
     showError(result.data.message);
   }
@@ -19,7 +20,9 @@ export function* createUser(action) {
   const result = yield call(apis.createUserRequest, user);
   if (result.status == 201) {
     yield setCookie(TOKEN, result.data.token);
-    yield navigation("/maphome");
+    yield setCookie(USERID, result.data.userid);
+    yield setCookie(EMAIL, result.data.email);
+    yield navigation("/profile");
   } else {
     showError(result.data.message);
   }
@@ -30,7 +33,9 @@ export function* signInUser(action) {
   const result = yield call(apis.signInUserRequest, user);
   if (result.status == 200) {
     yield setCookie(TOKEN, result.data.token);
-    yield navigation("/maphome");
+    yield setCookie(TOKEN, result.data.user.id);
+    yield setCookie(TOKEN, result.data.user.email);
+    yield navigation("/profile");
   } else {
     showError(result.data.message);
   }

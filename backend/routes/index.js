@@ -20,22 +20,18 @@ const deleteUserFavFacility = require("../controllers/deleteFavFacilityControlle
 
 router.post("/users", createUser);
 router.post("/signin", signInUser);
-router.get("/users/:userid", verifyJWTToken, getUserProfile);
-router.delete("/users/:userid", verifyJWTToken, deleteUser);
-router.put("/users/:userid", verifyJWTToken, updateUser);
+router.get("/users", verifyJWTToken, getUserProfile);
+router.delete("/users", verifyJWTToken, deleteUser);
+router.put("/users", verifyJWTToken, updateUser);
 router.get("/users/all_deleted", getAllDeletedUsers);
 
-router.get("/users/:userid/homes", verifyJWTToken, getUserFavHomes);
-router.post("/users/:userid/homes", verifyJWTToken, addUserFavHomes);
-router.put("/users/:id/homes", verifyJWTToken, updateUserFavHomes);
-router.delete("/users/:id/homes", verifyJWTToken, deleteUserFavHomes);
+router.get("/users/homes", verifyJWTToken, getUserFavHomes);
+router.post("/users/homes", verifyJWTToken, addUserFavHomes);
+router.put("/users/homes", verifyJWTToken, updateUserFavHomes);
+router.delete("/users/homes", verifyJWTToken, deleteUserFavHomes);
 
-router.post("/users/:userid/facilities", verifyJWTToken, addUserFavFacility);
-router.get("/users/:userid/facilities", verifyJWTToken, getUserFavFacilities);
-router.delete(
-  "/users/:userid/facilities",
-  verifyJWTToken,
-  deleteUserFavFacility
-);
+router.post("/users/facilities", verifyJWTToken, addUserFavFacility);
+router.get("/users/facilities", verifyJWTToken, getUserFavFacilities);
+router.delete("/users/facilities", verifyJWTToken, deleteUserFavFacility);
 
 module.exports = router;

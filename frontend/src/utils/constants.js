@@ -1,5 +1,13 @@
 export const TOKEN = "TOKEN";
 export const EMAIL = "EMAIL";
+export const USERID = "USERID";
+import {
+  faUser,
+  faAddressCard,
+  faLocation,
+  faHome,
+  faRightFromBracket
+} from "@fortawesome/free-solid-svg-icons";
 
 export const InputType = {
   text: "text",
@@ -137,3 +145,32 @@ export const optionsFailureSnackbar = {
     fontSize: "16px",
   },
 };
+
+
+export const MENU_ITEMS = [
+  {
+    id: 0,
+    name: "menu.home",
+    icon: faHome,
+  },
+  {
+    id: 2,
+    name: "menu.details",
+    icon: faUser,
+  },
+  {
+    id: 3,
+    name: "menu.address",
+    icon: faAddressCard,
+  },
+  {
+    id: 4,
+    name: "menu.faciliteis",
+    icon: faLocation,
+  },
+  {
+    id: 5,
+    name: "menu.logout",
+    icon: faRightFromBracket,
+  },
+];

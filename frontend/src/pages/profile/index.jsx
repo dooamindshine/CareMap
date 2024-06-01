@@ -6,10 +6,10 @@ import {
   WhiteHeading,
   XLargeText,
 } from "../../styling/common";
-import { createUserData } from "../../localredux/user";
+import { createUserData, getUserData } from "../../localredux/user";
 import withBase from "hocs/base_page";
 import {
-  SignUpParent,
+  ProfileParent,
   Left,
   Right,
   LeftParent,
@@ -18,10 +18,11 @@ import {
   Table,
   Td,
   Tr,
+  HeaderParent,
 } from "./styles";
 import { useNavigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Lottie from "lottie-react";
 import signup from "images/lotties/signup.json";
 import CareHeader from "components/header";
@@ -48,13 +49,22 @@ import { useCookies } from "react-cookie";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Colors from "../../styling/color";
+import { EMAIL, TOKEN, USERID } from "utils/constants";
+import { SelectUserData } from "localredux/user/selectors";
+import { MainMenu } from "components/menu/MainMenu";
+import Profiledetails from "./profiledetails";
 
-function SignUp() {
+function Profile() {
   const { t } = useBaseProps();
   const navigation = useNavigate();
   const dispatch = useDispatch();
+  const userData = useSelector(SelectUserData);
+  console.log(userData);
   const [inputs, setInputs] = useState({});
-  const [cookies, setCookie] = useCookies(["token", "email"]);
+  const [cookies, setCookie] = useCookies(["token", "email", "userid"]);
+  const email = cookies[EMAIL];
+  const userid = cookies[USERID];
+  const token = cookies[TOKEN];
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, {
@@ -63,6 +73,11 @@ function SignUp() {
     restDelta: 0.001,
   });
 
+  useEffect(() => {
+    dispatch(
+      getUserData({ setCookie, navigation, showError, email, token, userid })
+    );
+  }, []);
   const createUser = (event) => {
     event.preventDefault();
     //console.log(inputs);
@@ -75,9 +90,15 @@ function SignUp() {
     notifyAccountCreationFail(text);
   };
   return (
-    <SignUpParent>
+    <ProfileParent>
       <AnimatePresence>
-        <LeftParent>
+        <HeaderParent>
+          <CareHeader />
+          <MainMenu/>
+        </HeaderParent>
+        <Profiledetails/>
+
+        {/* <LeftParent>
           <CareHeader />
           <Left>
             <Lottie animationData={signup} loop={false} />
@@ -195,19 +216,19 @@ function SignUp() {
           </InputMargin>
           <InputMargin>
             <CustomInput
-              name={"zipcode"}
+              name={"zip_code"}
               icon={faLocation}
               inputs={inputs}
               setInputs={setInputs}
-              label={t("signup.zipcode")}
+              label={t("signup.zip_code")}
               type="text"
             />
           </InputMargin>
           <Button label={t("signup.submit")} onClick={createUser}></Button>
-        </Right>
+        </Right> */}
       </AnimatePresence>
-    </SignUpParent>
+    </ProfileParent>
   );
 }
 
-export default withBase(SignUp);
+export default withBase(Profile);

@@ -11,7 +11,7 @@
     "children": "Number of Children",
     "marital_status": "Marital Status",
     "address": "Address",
-    "zip_code": "Zip Code",
+    "zipcode": "Zip Code",
     "birthdate": "Birthdate",
     "email": "Email",
     "password": "password",
@@ -26,5 +26,18 @@
     "signin": "Sign In",
     "submit": "Submit",
     "dont": "Don't have an account ? Create Account"
+  },
+  "profile": {
+    "profiledata": "Your Personal Details",
+    "update": "Update Profile",
+    "edit": "Edit Profile",
+    "delete": "Delete Profile"
+  },
+  "menu": {
+    "home": "Map Home",
+    "details": "Profile Details",
+    "address": "Addresses",
+    "faciliteis": "Facilities",
+    "logout": "Logout"
   }
 }
