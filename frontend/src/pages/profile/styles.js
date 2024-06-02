@@ -5,7 +5,24 @@ import Colors from "styling/color";
 const ProfileParent = styled.div`
   display: flex;
   flex: 1;
+  flex-direction: row;
+  justify-content: center;
+  @media screen and (max-width: 700px) {
+    flex-direction: column; !important;
+  }
+`;
+
+const ProfileInnerChild = styled.div`
+  display: flex;
+  flex: 1;
   flex-direction: column;
+  justify-content: flex-start;
+  @media screen and (max-width: 700px) {
+    flex-direction: column; !important;
+  }
+`;
+
+const MenuParent = styled.div`
   justify-content: flex-start;
   @media screen and (max-width: 700px) {
     flex-direction: column; !important;
@@ -16,16 +33,16 @@ const ProfileDetailsParent = styled.div`
   display: flex;
   flex: 1;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
+  align-items: center;
   border-left-top: 1px solid ${Colors.blue_munsell};
   border-left-bottom: 1px solid ${Colors.blue_munsell};
-  margin-left: 20px;
-  padding-left: 20px;
-  padding-top: 20px;
-  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
-  margin-left: 50px;
-  margin-right: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 50px;
+  padding-bottom: 50px;
   border-radius: 10px;
+  margin-top: 50px;
 `;
 
 const HeaderParent = styled(motion.div)`
@@ -61,6 +78,15 @@ const ButtonEditParent = styled(motion.button)`
   @media screen and (max-width: 700px) {
     margin-top: 10px !important;
   }
+`;
+
+const MenuButton = styled(motion.div)`
+  position: fixed;
+  z-index: 2000;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: block;
 `;
 
 const Left = styled(motion.div)`
@@ -142,5 +168,8 @@ export {
   MarginButton,
   ButtonEditParent,
   DivRow,
-  DivRowSpace
+  DivRowSpace,
+  MenuParent,
+  ProfileInnerChild,
+  MenuButton
 };

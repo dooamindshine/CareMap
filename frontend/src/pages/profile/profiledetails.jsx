@@ -56,7 +56,6 @@ import "react-toastify/dist/ReactToastify.css";
 import Colors from "../../styling/color";
 import { EMAIL, TOKEN, USERID } from "utils/constants";
 import { SelectUserData } from "localredux/user/selectors";
-import { MainMenu } from "components/menu/MainMenu";
 import edit from "images/lotties/edit.json";
 import deletef from "images/lotties/delete.json";
 
@@ -65,6 +64,7 @@ function ProfileDetils() {
   const navigation = useNavigate();
   const dispatch = useDispatch();
   const userData = useSelector(SelectUserData);
+  const [isEdit, setIsEdit] = useState(false);
   console.log(userData);
   const [inputs, setInputs] = useState({});
   const [cookies, setCookie] = useCookies(["token", "email", "userid"]);
@@ -84,9 +84,8 @@ function ProfileDetils() {
       getUserData({ setCookie, navigation, showError, email, token, userid })
     );
   }, []);
-  const createUser = (event) => {
+  const updateUser = (event) => {
     event.preventDefault();
-    //console.log(inputs);
     const user = { ...inputs };
     dispatch(createUserData({ user, setCookie, navigation, showError }));
   };
@@ -95,6 +94,7 @@ function ProfileDetils() {
   const showError = (text) => {
     notifyAccountCreationFail(text);
   };
+
   return (
     <ProfileDetailsParent>
       <AnimatePresence>
@@ -105,6 +105,7 @@ function ProfileDetils() {
             </HeadingMargin>
             <MarginButton>
               <ButtonEditParent
+                onClick={() => setIsEdit(!isEdit)}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >
@@ -129,6 +130,7 @@ function ProfileDetils() {
                 setInputs={setInputs}
                 label={t("signup.first_name")}
                 type="text"
+                placeholder={userData.first_name}
               />
             </InputMargin>
             <InputMargin>
@@ -139,62 +141,100 @@ function ProfileDetils() {
                 setInputs={setInputs}
                 label={t("signup.last_name")}
                 type="text"
+                placeholder={userData.last_name}
               />
             </InputMargin>
           </DivRow>
           <DivRow>
+            {isEdit ? (
+              <InputMargin>
+                <CustomInput
+                  name={"birthdate"}
+                  icon={faBirthdayCake}
+                  inputs={inputs}
+                  setInputs={setInputs}
+                  label={t("signup.birthdate")}
+                  type="date"
+                />
+              </InputMargin>
+            ) : (
+              <InputMargin>
+                <CustomInput
+                  readOnly
+                  name={"birthdate"}
+                  icon={faBirthdayCake}
+                  inputs={inputs}
+                  setInputs={setInputs}
+                  label={t("signup.birthdate")}
+                  type="text"
+                  placeholder={userData.birthdate?.split("T")[0]}
+                />
+              </InputMargin>
+            )}
             <InputMargin>
               <CustomInput
-                name={"birthdate"}
-                icon={faBirthdayCake}
-                inputs={inputs}
-                setInputs={setInputs}
-                label={t("signup.birthdate")}
-                type="date"
-              />
-            </InputMargin>
-            <InputMargin>
-              <CustomInput
+                readOnly
                 name={"email"}
                 icon={faEnvelope}
                 inputs={inputs}
                 setInputs={setInputs}
                 label={t("signup.email")}
                 type="email"
+                placeholder={userData.email}
               />
             </InputMargin>
           </DivRow>
           <DivRow>
-            <InputMargin>
-              <CustomInput
-                name={"age"}
-                icon={faPerson}
-                inputs={inputs}
-                setInputs={setInputs}
-                label={t("signup.age")}
-                type="number"
-              />
-            </InputMargin>
-            <InputMargin>
-              <OptionGroup
-                name={"gender"}
-                icon={faGenderless}
-                inputs={inputs}
-                setInputs={setInputs}
-                label={t("signup.gender")}
-                list={["male", "female", "prefer not to say"]}
-              />
-            </InputMargin>
-            <InputMargin>
-              <OptionGroup
-                name={"marital_status"}
-                icon={faRing}
-                inputs={inputs}
-                setInputs={setInputs}
-                label={t("signup.marital_status")}
-                list={["single", "married", "prefer not to say"]}
-              />
-            </InputMargin>
+            {isEdit ? (
+              <InputMargin>
+                <OptionGroup
+                  name={"gender"}
+                  icon={faGenderless}
+                  inputs={inputs}
+                  setInputs={setInputs}
+                  label={t("signup.gender")}
+                  list={["male", "female", "prefer not to say"]}
+                />
+              </InputMargin>
+            ) : (
+              <InputMargin>
+                <CustomInput
+                  readOnly
+                  name={"gender"}
+                  icon={faGenderless}
+                  inputs={inputs}
+                  setInputs={setInputs}
+                  label={t("signup.gender")}
+                  type="text"
+                  placeholder={userData.gender}
+                />
+              </InputMargin>
+            )}
+            {isEdit ? (
+              <InputMargin>
+                <OptionGroup
+                  name={"marital_status"}
+                  icon={faRing}
+                  inputs={inputs}
+                  setInputs={setInputs}
+                  label={t("signup.marital_status")}
+                  list={["single", "married", "prefer not to say"]}
+                />
+              </InputMargin>
+            ) : (
+              <InputMargin>
+                <CustomInput
+                  readOnly
+                  name={"marital_status"}
+                  icon={faRing}
+                  inputs={inputs}
+                  setInputs={setInputs}
+                  label={t("signup.marital_status")}
+                  type="text"
+                  placeholder={userData.marital_status}
+                />
+              </InputMargin>
+            )}
           </DivRow>
           <DivRow>
             <InputMargin>
@@ -205,6 +245,7 @@ function ProfileDetils() {
                 setInputs={setInputs}
                 label={t("signup.children")}
                 type="number"
+                placeholder={userData.children}
               />
             </InputMargin>
             <InputMargin>
@@ -215,6 +256,7 @@ function ProfileDetils() {
                 setInputs={setInputs}
                 label={t("signup.address")}
                 type="text"
+                placeholder={userData.address}
               />
             </InputMargin>
             <InputMargin>
@@ -225,19 +267,11 @@ function ProfileDetils() {
                 setInputs={setInputs}
                 label={t("signup.zipcode")}
                 type="text"
+                placeholder={userData.zipcode}
               />
             </InputMargin>
           </DivRow>
         </div>
-        {/* <table style={{ width: "100%" }}>
-          <tr>
-            <TD>
-             
-            </TD>
-          </tr>
-             
-          
-        </table> */}
       </AnimatePresence>
     </ProfileDetailsParent>
   );

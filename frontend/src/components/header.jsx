@@ -9,7 +9,7 @@ import { useBaseProps } from "hocs/base_component";
 import Lottie from "lottie-react";
 import logo from "images/lotties/logo_top.json";
 
-function Header() {
+function Header(props) {
   const navigation = useNavigate();
   const dispatch = useDispatch();
   const { t } = useBaseProps();

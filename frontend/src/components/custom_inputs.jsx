@@ -30,10 +30,12 @@ function CustomInput(props) {
             </FieldLabelTextParent>
           </FieldParent>
           <Input
+            readOnly={props.readOnly}
             type={props.type}
             name={props.name}
             value={props.inputs[props.name] || ""}
             onChange={handleChange}
+            placeholder={props?.placeholder}
           ></Input>
         </label>
       </AnimatePresence>

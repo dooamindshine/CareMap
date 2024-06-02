@@ -10,7 +10,6 @@ const HeaderParent = styled.div`
   align-items: center;
   text-shadow: #e0e0e0 1px 1px 0;
   margin-left: 10px;
-  margin-right: 10px;
 `;
 
 const InputParent = styled(motion.div)`
@@ -120,5 +119,5 @@ export {
   Input,
   Select,
   ButtonParent,
-  MarginLogo
+  MarginLogo,
 };
