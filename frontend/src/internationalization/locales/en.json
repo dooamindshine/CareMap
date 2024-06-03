@@ -31,7 +31,10 @@
     "profiledata": "Your Personal Details",
     "update": "Update Profile",
     "edit": "Edit Profile",
-    "delete": "Delete Profile"
+    "delete": "Delete Profile",
+    "profileupdate": "Profile Updated successfully",
+    "deletefail": "User deleted fail",
+    "deletesuccess": "User deleted successfully"
   },
   "menu": {
     "home": "Map Home",

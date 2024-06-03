@@ -4,8 +4,7 @@ import { EMAIL, TOKEN, USERID } from "utils/constants";
 import { setUserData } from "./index";
 
 export function* getUserData(action) {
-  const { email, token, showError, userid, setCookie } =
-    action.payload;
+  const { email, token, showError, userid } = action.payload;
   const result = yield call(apis.getUserProfile, email, userid, token);
   console.log(result);
   if (result.status == 200) {
@@ -25,6 +24,63 @@ export function* createUser(action) {
     yield navigation("/profile");
   } else {
     showError(result.data.message);
+  }
+}
+
+export function* updateUserData(action) {
+  const { user, showError, showSuccess, email, userid, token, oldUserData } =
+    action.payload;
+  const newData = { ...oldUserData };
+  if (user.hasOwnProperty("first_name")) {
+    newData.first_name = user.first_name;
+  }
+  if (user.hasOwnProperty("last_name")) {
+    newData.last_name = user.last_name;
+  }
+  if (user.hasOwnProperty("marital_status")) {
+    newData.marital_status = user.marital_status;
+  }
+
+  if (user.hasOwnProperty("zipcode")) {
+    newData.zipcode = user.zipcode;
+  }
+
+  if (user.hasOwnProperty("gender")) {
+    newData.gender = user.gender;
+  }
+
+  if (user.hasOwnProperty("children")) {
+    newData.children = user.children;
+  }
+
+  if (user.hasOwnProperty("birthdate")) {
+    newData.birthdate = user.birthdate;
+  }
+  if (user.hasOwnProperty("age")) {
+    newData.age = user.age;
+  }
+  const result = yield call(
+    apis.updateUserProfile,
+    email,
+    userid,
+    token,
+    newData
+  );
+  if (result.status == 200) {
+    showSuccess();
+  } else {
+    showError(result.data.message);
+  }
+}
+
+export function* deleteUserData(action) {
+  const { showErrorDelete, showSuccessDelete, email, userid, token } =
+    action.payload;
+  const result = yield call(apis.deleteUserProfile, email, userid, token);
+  if (result.status == 200) {
+    showSuccessDelete();
+  } else {
+    showErrorDelete(result.data.message);
   }
 }
 

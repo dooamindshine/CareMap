@@ -5,7 +5,7 @@ import Colors from "styling/color";
 const ProfileParent = styled.div`
   display: flex;
   flex: 1;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   @media screen and (max-width: 700px) {
     flex-direction: column; !important;
@@ -66,6 +66,11 @@ const LeftParent = styled(motion.div)`
 
 const MarginButton = styled(motion.div)`
   margin-left: 20px;
+`;
+
+const PaddinButton = styled(motion.div)`
+  margin-left: 20px;
+  margin-right: 20px;
 `;
 
 const ButtonEditParent = styled(motion.button)`
@@ -171,5 +176,6 @@ export {
   DivRowSpace,
   MenuParent,
   ProfileInnerChild,
-  MenuButton
+  MenuButton,
+  PaddinButton
 };

@@ -120,11 +120,11 @@ const deleteUserProfile = async (email, userid, token) => {
     .catch((error) => error.response);
 };
 
-const updateUserProfile = async (email, userid, token, data) => {
+const updateUserProfile = async (email, userid, token, user) => {
   return requests
     .put(
       "/api/users?userid=" + userid,
-      { data },
+      { user },
       {
         headers: {
           Authorization: "Bearer " + token,

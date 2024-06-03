@@ -1,42 +1,29 @@
 import React, { useEffect, useState } from "react";
+import { WhiteHeading } from "../../styling/common";
 import {
-  CustomATag,
-  LargeText,
-  RegularText,
-  WhiteHeading,
-  XLargeText,
-} from "../../styling/common";
-import { createUserData, getUserData } from "../../localredux/user";
+  getUserData,
+  updateUserData,
+  deleteUserData,
+} from "../../localredux/user";
 import withBase from "hocs/base_page";
 import {
-  ProfileParent,
-  Left,
-  Right,
-  LeftParent,
   InputMargin,
   HeadingMargin,
-  Table,
-  TD,
-  Tr,
-  HeaderParent,
   ProfileDetailsParent,
   MarginButton,
   ButtonEditParent,
   DivRow,
   DivRowSpace,
+  PaddinButton,
 } from "./styles";
 import { useNavigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import Lottie from "lottie-react";
-import profile_animation from "images/lotties/profile.json";
-import CareHeader from "components/header";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CustomInput from "components/custom_inputs";
 import {
   faUser,
   faUsersLine,
-  faPerson,
   faGenderless,
   faRing,
   faChildren,
@@ -44,16 +31,13 @@ import {
   faLocation,
   faEnvelope,
   faBirthdayCake,
-  faLock,
 } from "@fortawesome/free-solid-svg-icons";
 import { useBaseProps } from "hocs/base_component";
 import OptionGroup from "components/option_group";
-import { motion, useScroll, useSpring } from "framer-motion";
 import Button from "components/custom_button";
 import { useCookies } from "react-cookie";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Colors from "../../styling/color";
 import { EMAIL, TOKEN, USERID } from "utils/constants";
 import { SelectUserData } from "localredux/user/selectors";
 import edit from "images/lotties/edit.json";
@@ -72,27 +56,60 @@ function ProfileDetils() {
   const userid = cookies[USERID];
   const token = cookies[TOKEN];
 
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  });
-
   useEffect(() => {
     dispatch(
       getUserData({ setCookie, navigation, showError, email, token, userid })
     );
   }, []);
-  const updateUser = (event) => {
-    event.preventDefault();
-    const user = { ...inputs };
-    dispatch(createUserData({ user, setCookie, navigation, showError }));
-  };
-  const notifyAccountCreationFail = (text) => toast(text);
 
   const showError = (text) => {
     notifyAccountCreationFail(text);
+  };
+
+  const showSuccess = () => {
+    navigation(0);
+    notifyAccountCreationSuccess(t("profile.profileupdate"));
+  };
+
+  const showErrorDelete = (text) => {
+    notifyAccountCreationFail(text);
+  };
+
+  const showSuccessDelete = () => {
+    navigation("/signin");
+    notifyAccountCreationSuccess(t("profile.deletesuccess"));
+  };
+
+  const notifyAccountCreationFail = (text) => toast(text);
+  const notifyAccountCreationSuccess = (text) => toast(text);
+
+  const updateUser = (event) => {
+    event.preventDefault();
+    const user = { ...inputs };
+    dispatch(
+      updateUserData({
+        user,
+        showError,
+        showSuccess,
+        email,
+        userid,
+        token,
+        oldUserData: userData,
+      })
+    );
+  };
+
+  const deleteUser = (event) => {
+    event.preventDefault();
+    dispatch(
+      deleteUserData({
+        showErrorDelete,
+        showSuccessDelete,
+        email,
+        userid,
+        token,
+      })
+    );
   };
 
   return (
@@ -116,6 +133,7 @@ function ProfileDetils() {
               <ButtonEditParent
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
+                onClick={(event) => deleteUser(event)}
               >
                 <Lottie animationData={deletef} loop={true} />
               </ButtonEditParent>
@@ -261,7 +279,7 @@ function ProfileDetils() {
             </InputMargin>
             <InputMargin>
               <CustomInput
-                name={"zip_code"}
+                name={"zipcode"}
                 icon={faLocation}
                 inputs={inputs}
                 setInputs={setInputs}
@@ -271,6 +289,11 @@ function ProfileDetils() {
               />
             </InputMargin>
           </DivRow>
+          {isEdit && (
+            <PaddinButton>
+              <Button label={t("profile.update")} onClick={updateUser}></Button>
+            </PaddinButton>
+          )}
         </div>
       </AnimatePresence>
     </ProfileDetailsParent>

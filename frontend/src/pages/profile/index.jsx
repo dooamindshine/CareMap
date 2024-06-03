@@ -47,6 +47,7 @@ function Profile() {
   };
   return (
     <ProfileParent>
+      <Navbar/>  
       <Profiledetails />
     </ProfileParent>
   );
