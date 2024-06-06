@@ -41,7 +41,7 @@ const Navbar = () => {
           </Link>
         </li>
         <li className="nav-item">
-          <Link to="/services" className="nav-links" onClick={toggleMenu}>
+          <Link to="/addresses" className="nav-links" onClick={toggleMenu}>
             {t("menu.address")}
           </Link>
         </li>

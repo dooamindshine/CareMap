@@ -5,7 +5,7 @@ import Signin from "pages/signin";
 import Signup from "pages/signup";
 import Maphome from "pages/maphome";
 import Profile from "pages/profile";
-import Navbar from "components/menu/NavBar";
+import Addresses from "pages/addresses";
 
 function App() {
   return (
@@ -17,6 +17,7 @@ function App() {
           <Route path="/signin" element={<Signin />} />
           <Route path="/maphome" element={<Maphome />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/addresses" element={<Addresses />} />
         </Routes>
       </Router>
     </>

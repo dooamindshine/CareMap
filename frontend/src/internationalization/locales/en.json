@@ -36,6 +36,15 @@
     "deletefail": "User deleted fail",
     "deletesuccess": "User deleted successfully"
   },
+  "addresses": {
+    "details": "Your Address Details",
+    "add": "Add address",
+    "new": "Enter new address",
+    "current": "Your Current Home Address",
+    "done": "Submit",
+    "deletesuccess": "Address deleted successfully",
+    "addsuccess": "Address added successfully"
+  },
   "menu": {
     "home": "Map Home",
     "details": "Profile Details",

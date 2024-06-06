@@ -40,6 +40,18 @@ const addUserAddress = async (email, userid, token, data) => {
     .catch((error) => error.response);
 };
 
+const deleteUserAddress = async (email, userid, token, uuid) => {
+  return requests
+    .delete("/api/users/homes?userid=" + userid + "&" + "uuid=" + uuid, {
+      headers: {
+        Authorization: "Bearer " + token,
+        email,
+      },
+    })
+    .then((res) => res)
+    .catch((error) => error.response);
+};
+
 const addUserFacility = async (email, userid, token, data) => {
   return requests
     .post(
@@ -68,18 +80,6 @@ const updateUserAddress = async (email, userid, token, data) => {
         },
       }
     )
-    .then((res) => res)
-    .catch((error) => error.response);
-};
-
-const deleteUserAddress = async (email, userid, token) => {
-  return requests
-    .delete("/api/users/homes?userid=" + userid, {
-      headers: {
-        Authorization: "Bearer " + token,
-        email,
-      },
-    })
     .then((res) => res)
     .catch((error) => error.response);
 };

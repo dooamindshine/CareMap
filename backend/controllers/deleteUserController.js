@@ -14,7 +14,7 @@ const deleteUser = async function (req, res) {
       const [results] = await db.query(deleteUser, [userid]);
       if (results) {
         return res
-          .status(200)
+          .status(204)
           .json({ message: "User deleted successfuly" });
       } else {
         return res.status(400).json({ message: "Failed to delete user" });

@@ -4,14 +4,18 @@ import {
   createUser,
   signInUser,
   updateUserData,
-  deleteUserData
+  deleteUserData,
+  addAddress,
+  deleteAddress
 } from "./user/saga";
 import {
   GET_USER_ACTION,
   CREATE_USER_ACTION,
   SIGNIN_USER_ACTION,
   UPDATE_USER_ACTION,
-  DELETE_USER_ACTION
+  DELETE_USER_ACTION,
+  ADD_ADDRESS_USER_ACTION,
+  DELETE_ADDRESS_USER_ACTION
 } from "./constants";
 
 const rootSaga = function* () {
@@ -21,6 +25,8 @@ const rootSaga = function* () {
     takeLatest(SIGNIN_USER_ACTION, signInUser),
     takeLatest(UPDATE_USER_ACTION, updateUserData),
     takeLatest(DELETE_USER_ACTION, deleteUserData),
+    takeLatest(ADD_ADDRESS_USER_ACTION, addAddress),
+    takeLatest(DELETE_ADDRESS_USER_ACTION, deleteAddress),
   ]);
 };
 

@@ -84,6 +84,29 @@ export function* deleteUserData(action) {
   }
 }
 
+export function* addAddress(action) {
+  const { showErrorAdd, showSuccessAdd, email, userid, token, address } =
+    action.payload;
+  const result = yield call(apis.addUserAddress, email, userid, token, address);
+  if (result.status == 200) {
+    showSuccessAdd();
+  } else {
+    showErrorAdd(result.data.message);
+  }
+}
+
+export function* deleteAddress(action) {
+  const { showErrorDelete, showSuccessDelete, email, userid, token, uuid } =
+    action.payload;
+  console.log("email:"+email)  
+  const result = yield call(apis.deleteUserAddress, email, userid, token, uuid);
+  if (result.status == 204) {
+    showSuccessDelete();
+  } else {
+    showErrorDelete(result.data.message);
+  }
+}
+
 export function* signInUser(action) {
   const { user, setCookie, navigation, showError } = action.payload;
   const result = yield call(apis.signInUserRequest, user);
