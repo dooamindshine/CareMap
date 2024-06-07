@@ -5,8 +5,6 @@ const MapHomeParent = styled.div`
   flex: 1;
   height: 100vh;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
 `;
 
 export { MapHomeParent };

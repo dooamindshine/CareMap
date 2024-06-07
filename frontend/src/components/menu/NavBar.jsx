@@ -31,7 +31,7 @@ const Navbar = () => {
       </div>
       <ul className={isOpen ? "nav-menu active" : "nav-menu"}>
         <li className="nav-item">
-          <Link to="/" className="nav-links" onClick={toggleMenu}>
+          <Link to="/maphome" className="nav-links" onClick={toggleMenu}>
             {t("menu.home")}
           </Link>
         </li>
