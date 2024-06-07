@@ -27,14 +27,25 @@ export const userSlice = createSlice({
     addAddress: (state, action) => {
       //const newAddress = [...state.addresses, action.payload.address];
       //const newAddress = [...state.addresses, action.payload.address];
-      state.addresses = [];
+     // state.addresses = [];
     },
     deleteAddress: (state, action) => {
       const addressUUid = action.payload.id;
       const filteredData = state.addresses.filter(
         (item) => item.id !== addressUUid
       );
-      state.addresses = filteredData;
+      //state.addresses = filteredData;
+    },
+    setFavAddress: (state, action) => {
+      const addressUUid = action.payload.clicked.id;
+      const isFav = action.payload.clicked.isFav;
+      //state.addresses = [action.payload.clicked];
+    },
+    getUserAddresses: (state, action) => {
+     
+    },
+    setUserAddresses: (state, action) => {
+      state.addresses = action.payload;
     },
   },
 });
@@ -47,7 +58,10 @@ export const {
   updateUserData,
   deleteUserData,
   addAddress,
-  deleteAddress
+  deleteAddress,
+  setFavAddress,
+  getUserAddresses,
+  setUserAddresses
 } = userSlice.actions;
 
 export default userSlice.reducer;

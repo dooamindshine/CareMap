@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { RegularText, WhiteHeading } from "../../styling/common";
 import {
   getUserData,
-  updateUserData,
-  deleteUserData,
   deleteAddress,
+  setFavAddress,
+  getUserAddresses,
 } from "../../localredux/user";
 import withBase from "hocs/base_page";
 import {
@@ -23,18 +23,20 @@ import { AnimatePresence } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import Lottie from "lottie-react";
 import CustomInput from "components/custom_inputs";
-import { faAddressCard, faLocation } from "@fortawesome/free-solid-svg-icons";
+import {
+  faAddressCard,
+  faDumpster,
+  faHeartCircleMinus,
+  faHeartCircleCheck,
+} from "@fortawesome/free-solid-svg-icons";
 import { useBaseProps } from "hocs/base_component";
 import Button from "components/custom_button";
 import { useCookies } from "react-cookie";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { EMAIL, TOKEN, USERID } from "utils/constants";
-import { SelectUserData } from "localredux/user/selectors";
+import { SelectUserAddresses, SelectUserData } from "localredux/user/selectors";
 import add from "images/lotties/add.json";
-import deletefav from "images/lotties/deletefav.json";
-import addfav from "images/lotties/fav.json";
-import unfav from "images/lotties/unfav.json";
 import Colors from "styling/color";
 import { CurrentMargin } from "./styles";
 import { CardList } from "./styles";
@@ -42,12 +44,14 @@ import { CardParent } from "./styles";
 import { DelFavParent } from "./styles";
 import { DelFavButton } from "./styles";
 import { addAddress } from "localredux/user";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function AddAdresses() {
   const { t } = useBaseProps();
   const navigation = useNavigate();
   const dispatch = useDispatch();
   const userData = useSelector(SelectUserData);
+  const addresses = useSelector(SelectUserAddresses);
   const [isAdd, setIsAdd] = useState(false);
   const [newAddresses, setNewAddresses] = useState([]);
   const [inputs, setInputs] = useState({});
@@ -56,9 +60,29 @@ function AddAdresses() {
   const userid = cookies[USERID];
   const token = cookies[TOKEN];
 
+  useEffect(() => {
+    dispatch(getUserAddresses({ email, token, userid }));
+  }, []);
+
+  useEffect(() => {
+    const data = [];
+    console.log("here");
+    addresses?.forEach((item) => {
+      const address = {
+        text: item.address,
+        isFav: item.isfav,
+        uuid: item.uuid,
+        id: item.idhomes,
+      };
+      data.push(address);
+    });
+    console.log(data);
+
+    setNewAddresses(data);
+  }, [addresses]);
+
   const addNewAddress = () => {
     const value = inputs.newAddresses;
-    console.log(value);
     const address = {
       text: value,
       isFav: false,
@@ -82,7 +106,7 @@ function AddAdresses() {
   };
 
   const showSuccessAdd = () => {
-    toast("adressess.addsuccess");
+    toast(t("adressess.addsuccess"));
   };
 
   const showErrorDelete = (text) => {
@@ -91,6 +115,14 @@ function AddAdresses() {
 
   const showSuccessDelete = () => {
     toast(t("adressess.deletesuccess"));
+  };
+
+  const showErrorFav = (text) => {
+    toast(text);
+  };
+
+  const showSuccesFav = () => {
+    toast(t("adressess.favsuccess"));
   };
 
   const deleteAddressHandle = (event, uuid) => {
@@ -109,6 +141,26 @@ function AddAdresses() {
     );
   };
 
+  const setAddressFav = (event, clicked) => {
+    event.preventDefault();
+    const findItem = newAddresses.filter((item) => item.uuid === clicked.uuid);
+    const removedList = newAddresses.filter(
+      (item) => item.uuid !== clicked.uuid
+    );
+    const favValue = !findItem[0].isFav;
+    removedList.push({ ...findItem[0], isFav: favValue });
+    setNewAddresses([...removedList]);
+    dispatch(
+      setFavAddress({
+        showSuccesFav,
+        showErrorFav,
+        email,
+        userid,
+        token,
+        clicked,
+      })
+    );
+  };
   return (
     <AddressDetailsParent>
       <AnimatePresence>
@@ -175,16 +227,30 @@ function AddAdresses() {
               return (
                 <CardParent>
                   <DelFavParent>
-                    <DelFavButton>
-                      <Lottie
-                        animationData={item.isFav ? addfav : unfav}
-                        loop={true}
-                      />
+                    <DelFavButton
+                      onClick={(event) => {
+                        setAddressFav(event, item);
+                      }}
+                    >
+                      {item.isFav ? (
+                        <FontAwesomeIcon
+                          color={Colors.red}
+                          icon={faHeartCircleCheck}
+                        />
+                      ) : (
+                        <FontAwesomeIcon
+                          color={Colors.blue_munsell}
+                          icon={faHeartCircleMinus}
+                        />
+                      )}
                     </DelFavButton>
                     <DelFavButton
                       onClick={(event) => deleteAddressHandle(event, item.uuid)}
                     >
-                      <Lottie animationData={deletefav} loop={true} />
+                      <FontAwesomeIcon
+                          color={Colors.purple}
+                          icon={faDumpster}
+                        />
                     </DelFavButton>
                   </DelFavParent>
                   <RegularText color={Colors.blue_columbia}>

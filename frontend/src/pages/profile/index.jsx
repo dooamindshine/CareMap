@@ -28,7 +28,6 @@ function Profile() {
   const navigation = useNavigate();
   const dispatch = useDispatch();
   const userData = useSelector(SelectUserData);
-  console.log(userData);
   const [cookies, setCookie] = useCookies(["token", "email", "userid"]);
   const email = cookies[EMAIL];
   const userid = cookies[USERID];

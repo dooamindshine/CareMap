@@ -8,6 +8,7 @@ const Colors = {
    blue_columbia: "rgba(207, 232, 239, 1)",
    blue_columbia_opaque: "rgba(207, 232, 239, 0.8)",
    border_green: " #00b894",
+   red: "#d1001f"
 
 };
 

@@ -49,7 +49,6 @@ function ProfileDetils() {
   const dispatch = useDispatch();
   const userData = useSelector(SelectUserData);
   const [isEdit, setIsEdit] = useState(false);
-  console.log(userData);
   const [inputs, setInputs] = useState({});
   const [cookies, setCookie] = useCookies(["token", "email", "userid"]);
   const email = cookies[EMAIL];

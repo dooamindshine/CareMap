@@ -35,7 +35,6 @@ const updateUser = async function (req, res) {
       gender,
       userid,
     ]);
-    console.log(results);
     if (results) {
       return res.status(200).json({ message: "User updated successfuly" });
     } else {

@@ -1,16 +1,23 @@
 import { call, delay, put } from "redux-saga/effects";
 import { apis } from "network/apis";
 import { EMAIL, TOKEN, USERID } from "utils/constants";
-import { setUserData } from "./index";
+import { setUserData, setUserAddresses } from "./index";
 
 export function* getUserData(action) {
   const { email, token, showError, userid } = action.payload;
   const result = yield call(apis.getUserProfile, email, userid, token);
-  console.log(result);
   if (result.status == 200) {
     yield put(setUserData(result.data.user));
   } else {
     showError(result.data.message);
+  }
+}
+
+export function* getUserAddresses(action) {
+  const { email, token, userid } = action.payload;
+  const result = yield call(apis.getUserAddress, email, userid, token);
+  if (result.status == 200) {
+    yield put(setUserAddresses(result.data.results));
   }
 }
 
@@ -98,12 +105,28 @@ export function* addAddress(action) {
 export function* deleteAddress(action) {
   const { showErrorDelete, showSuccessDelete, email, userid, token, uuid } =
     action.payload;
-  console.log("email:"+email)  
   const result = yield call(apis.deleteUserAddress, email, userid, token, uuid);
   if (result.status == 204) {
     showSuccessDelete();
   } else {
     showErrorDelete(result.data.message);
+  }
+}
+
+export function* setFavAddress(action) {
+  const { showErrorFav, showSuccesFav, email, userid, token, clicked } =
+    action.payload;
+  const result = yield call(
+    apis.updateUserAddress,
+    email,
+    userid,
+    token,
+    clicked
+  );
+  if (result.status == 200) {
+    showSuccesFav();
+  } else {
+    showErrorFav(result.data.message);
   }
 }
 

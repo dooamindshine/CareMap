@@ -12,7 +12,7 @@ const addUserFavHomes = async function (req, res) {
         .json({ message: "Userid is required in parameters" });
 
     let insertHomes =
-      "INSERT INTO homes (userid, address, uuid)  values ( ? , ?, ?)";
+      "INSERT INTO homes (userid, address, uuid, isfav)  values ( ? , ?, ?, false)";
     const [results, fields] = await db.query(insertHomes, [
       userid,
       address.text,

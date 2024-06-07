@@ -43,7 +43,8 @@
     "current": "Your Current Home Address",
     "done": "Submit",
     "deletesuccess": "Address deleted successfully",
-    "addsuccess": "Address added successfully"
+    "addsuccess": "Address added successfully",
+    "favsuccess": "Address updated successfully"
   },
   "menu": {
     "home": "Map Home",

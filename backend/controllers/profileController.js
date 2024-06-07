@@ -10,7 +10,7 @@ const getUserProfile = async function (req, res) {
         .status(400)
         .json({ message: "User id is required in parameters" });
 
-    let findUser = "SELECT * FROM users u LEFT JOIN facilities f ON u.id = f.userid LEFT JOIN homes h ON u.id  = h.userid WHERE u.id = ? AND is_deleted = 0;"
+    let findUser = "SELECT * FROM users u WHERE u.id = ? AND is_deleted = 0;"
     const [results] = await db.query(findUser, [userid]);
     console.log(JSON.stringify(results))
     if (results.length == 1) {

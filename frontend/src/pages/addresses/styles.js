@@ -90,6 +90,7 @@ const CardList = styled(motion.div)`
   flex-direction: row;
   margin-top: 20px;
   margin-bottom: 20px;
+  flex-wrap: wrap;
 `;
 
 
@@ -108,12 +109,13 @@ const CardParent = styled(motion.div)`
   border-radius: 5%;
   display: block;
   margin-right: 15px;
+  margin-top: 15px;
   padding-left: 5px;
   padding-right: 5px;
   background: #F4F4F9;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   @media screen and (max-width: 700px) {
-    margin-top: 10px !important;
+    width: 300px !important;
   }
 `;
 

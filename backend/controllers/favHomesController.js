@@ -1,6 +1,9 @@
+require("dotenv").config();
+const db = require("../db");
+
 const getUserFavHomes = async function (req, res) {
     try {
-      const { userid } = req.query.userid;
+      const userid  = req.query.userid;
   
       if (!userid)
         return res
@@ -8,13 +11,11 @@ const getUserFavHomes = async function (req, res) {
           .json({ message: "Userid is required in parameters" });
   
       let findHomes = "SELECT * FROM homes WHERE userid = ?";
-      const [rows] = await db.query(findHomes, [userid]);
-      if (rows.length == 1) {
-        const homes = rows[0];
-        console.log(homes);
+      const [results] = await db.query(findHomes, [userid]);
+      if (results) {
         return res
           .status(200)
-          .json({ message: "User Homes Data Fetch successfuly", homes });
+          .json({ message: "User Homes Data Fetch successfuly", results });
       } else {
         return res.status(401).json({ message: "No homes found for this user" });
       }

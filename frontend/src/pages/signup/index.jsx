@@ -65,7 +65,6 @@ function SignUp() {
 
   const createUser = (event) => {
     event.preventDefault();
-    //console.log(inputs);
     const user = { ...inputs };
     dispatch(createUserData({ user, setCookie, navigation, showError }));
   };

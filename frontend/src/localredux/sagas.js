@@ -6,7 +6,9 @@ import {
   updateUserData,
   deleteUserData,
   addAddress,
-  deleteAddress
+  deleteAddress,
+  setFavAddress,
+  getUserAddresses
 } from "./user/saga";
 import {
   GET_USER_ACTION,
@@ -15,7 +17,9 @@ import {
   UPDATE_USER_ACTION,
   DELETE_USER_ACTION,
   ADD_ADDRESS_USER_ACTION,
-  DELETE_ADDRESS_USER_ACTION
+  DELETE_ADDRESS_USER_ACTION,
+  FAV_ADDRESS_USER_ACTION,
+  GET_ADDRESS_USER_ACTION
 } from "./constants";
 
 const rootSaga = function* () {
@@ -27,6 +31,8 @@ const rootSaga = function* () {
     takeLatest(DELETE_USER_ACTION, deleteUserData),
     takeLatest(ADD_ADDRESS_USER_ACTION, addAddress),
     takeLatest(DELETE_ADDRESS_USER_ACTION, deleteAddress),
+    takeLatest(FAV_ADDRESS_USER_ACTION, setFavAddress),
+    takeLatest(GET_ADDRESS_USER_ACTION, getUserAddresses),
   ]);
 };
 
