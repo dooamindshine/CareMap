@@ -18,6 +18,9 @@ const getUserFavFacilities = require("../controllers/favFacilitiesController");
 const addUserFavFacility = require("../controllers/createFavFacilityController");
 const deleteUserFavFacility = require("../controllers/deleteFavFacilityController");
 
+
+const getLocations = require("../controllers/getLoactions");
+
 router.post("/users", createUser);
 router.post("/signin", signInUser);
 router.get("/users", verifyJWTToken, getUserProfile);
@@ -33,5 +36,7 @@ router.delete("/users/homes", verifyJWTToken, deleteUserFavHomes);
 router.post("/users/facilities", verifyJWTToken, addUserFavFacility);
 router.get("/users/facilities", verifyJWTToken, getUserFavFacilities);
 router.delete("/users/facilities", verifyJWTToken, deleteUserFavFacility);
+
+router.delete("/locations", verifyJWTToken, getLocations);
 
 module.exports = router;

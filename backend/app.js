@@ -4,8 +4,10 @@ const cors =  require("cors");
 var routes = require('./routes');
 const port = 8000;
 require('dotenv').config();
+var cron = require('node-cron');
 
 const db = require('./db');
+const seedData = require("./scheduler/seed");
 
 const corsConfigs = {
   origin: "http://localhost:3000",
@@ -24,18 +26,10 @@ app.get('/', (req, res) => {
 
 app.use('/api', routes);
 
+//every month first day midnight
+//cron.schedule('0 0 1 * *', seedData);
 
-// // Example route to fetch data from the database
-// app.get('/users', (req, res) => {
-//   db.query('SELECT * FROM users', (err, results) => {
-//     if (err) {
-//       console.error('Error fetching users:', err);
-//       res.status(500).send('Internal Server Error');
-//       return;
-//     }
-//     res.json(results);
-//   });
-// });
+//seedData()
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
