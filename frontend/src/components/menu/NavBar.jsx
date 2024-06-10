@@ -46,12 +46,12 @@ const Navbar = () => {
           </Link>
         </li>
         <li className="nav-item">
-          <Link to="/contact" className="nav-links" onClick={toggleMenu}>
+          <Link to="/facility" className="nav-links" onClick={toggleMenu}>
             {t("menu.faciliteis")}
           </Link>
         </li>
         <li className="nav-item">
-          <Link to="/contact" className="nav-links" onClick={toggleMenu}>
+          <Link to="/signout" className="nav-links" onClick={toggleMenu}>
             {t("menu.logout")}
           </Link>
         </li>

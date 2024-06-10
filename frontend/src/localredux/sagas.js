@@ -8,7 +8,11 @@ import {
   addAddress,
   deleteAddress,
   setFavAddress,
-  getUserAddresses
+  getUserAddresses,
+  getLocations,
+  getFacilities,
+  addFacilities,
+  deleteFacilities
 } from "./user/saga";
 import {
   GET_USER_ACTION,
@@ -19,7 +23,11 @@ import {
   ADD_ADDRESS_USER_ACTION,
   DELETE_ADDRESS_USER_ACTION,
   FAV_ADDRESS_USER_ACTION,
-  GET_ADDRESS_USER_ACTION
+  GET_ADDRESS_USER_ACTION,
+  GET_LOCATIONS_ACTION,
+  GET_FACILITIES_ACTION,
+  ADD_FACILITIES_ACTION,
+  DELETE_FACILITIES_ACTION
 } from "./constants";
 
 const rootSaga = function* () {
@@ -33,6 +41,10 @@ const rootSaga = function* () {
     takeLatest(DELETE_ADDRESS_USER_ACTION, deleteAddress),
     takeLatest(FAV_ADDRESS_USER_ACTION, setFavAddress),
     takeLatest(GET_ADDRESS_USER_ACTION, getUserAddresses),
+    takeLatest(GET_LOCATIONS_ACTION, getLocations),
+    takeLatest(GET_FACILITIES_ACTION, getFacilities),
+    takeLatest(ADD_FACILITIES_ACTION, addFacilities),
+    takeLatest(DELETE_FACILITIES_ACTION, deleteFacilities),
   ]);
 };
 

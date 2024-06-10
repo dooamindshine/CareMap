@@ -1,7 +1,7 @@
 import { call, delay, put } from "redux-saga/effects";
 import { apis } from "network/apis";
 import { EMAIL, TOKEN, USERID } from "utils/constants";
-import { setUserData, setUserAddresses } from "./index";
+import { setUserData, setUserAddresses, setLocations, setFacilities } from "./index";
 
 export function* getUserData(action) {
   const { email, token, showError, userid } = action.payload;
@@ -21,6 +21,42 @@ export function* getUserAddresses(action) {
   }
 }
 
+
+export function* getLocations(action) {
+  const { email, token, userid, category } = action.payload;
+  const result = yield call(apis.getLocations, email, userid, token, category);
+  console.log(result)
+  if (result.status == 200) {
+    yield put(setLocations(result.data.results));
+  }
+}
+
+export function* getFacilities(action) {
+  const { email, token, userid } = action.payload;
+  const result = yield call(apis.getUserFacilities, email, userid, token);
+  if (result.status == 200) {
+    yield put(setFacilities(result.data.results));
+  }
+}
+
+
+
+
+export function* deleteFacilities(action) {
+  const { email, token, userid, id } = action.payload;
+  const result = yield call(apis.deleteUserFacility, email, userid, token, id);
+  if (result.status == 200) {
+    yield put(setFacilities(result.data.results));
+  }
+}
+
+export function* addFacilities(action) {
+  const { email, token, userid, data } = action.payload;
+  const result = yield call(apis.addUserFacility, email, userid, token, data);
+  if (result.status == 200) {
+    yield put(setFacilities(result.data.results));
+  }
+}
 export function* createUser(action) {
   const { user, setCookie, navigation, showError } = action.payload;
   const result = yield call(apis.createUserRequest, user);

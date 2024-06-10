@@ -1,13 +1,14 @@
+require("dotenv").config();
+const db = require("../db");
+
 const getAllDeletedUsers = async function (req, res) {
   try {
     let findUsers = "SELECT * FROM users WHERE is_deleted = 1";
-    const [rows] = await db.query(findUsers);
-    if (rows.length == 1) {
-      const users = rows[0];
-      console.log(users);
+    const [results] = await db.query(findUsers);
+    if (results) {
       return res
         .status(200)
-        .json({ message: "Delted User Data Fetch successfuly", users });
+        .json({ message: "Delted User Data Fetch successfuly", results });
     } else {
       return res.status(401).json({ message: "Users not found" });
     }

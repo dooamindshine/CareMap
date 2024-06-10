@@ -27,7 +27,7 @@ export const userSlice = createSlice({
     addAddress: (state, action) => {
       //const newAddress = [...state.addresses, action.payload.address];
       //const newAddress = [...state.addresses, action.payload.address];
-     // state.addresses = [];
+      // state.addresses = [];
     },
     deleteAddress: (state, action) => {
       const addressUUid = action.payload.id;
@@ -41,11 +41,24 @@ export const userSlice = createSlice({
       const isFav = action.payload.clicked.isFav;
       //state.addresses = [action.payload.clicked];
     },
-    getUserAddresses: (state, action) => {
-     
-    },
+    getUserAddresses: (state, action) => {},
     setUserAddresses: (state, action) => {
       state.addresses = action.payload;
+    },
+    getLocations: (state, action) => {},
+    setLocations: (state, action) => {
+      state.locations = action.payload;
+    },
+    getFacilities: (state, action) => {},
+    setFacilities: (state, action) => {
+      state.facilities = action.payload;
+    },
+    addFacilities: (state, action) => {},
+    deleteFacilities: (state, action) => {
+      const facis = state.facilities;
+      const id = action.payload.id;
+      const removedData = facis.filter((item) => item.idfacilities != id);
+      state.facilities = removedData;
     },
   },
 });
@@ -61,7 +74,13 @@ export const {
   deleteAddress,
   setFavAddress,
   getUserAddresses,
-  setUserAddresses
+  setUserAddresses,
+  getLocations,
+  setLocations,
+  getFacilities,
+  setFacilities,
+  addFacilities,
+  deleteFacilities,
 } = userSlice.actions;
 
 export default userSlice.reducer;

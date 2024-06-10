@@ -1,7 +1,9 @@
 {
   "home": {
     "heading": "Learn React",
-    "logo": "CareMap"
+    "logo": "CareMap",
+    "loading": " Loading Care Map",
+    "redirecting": "Redirecting to sign in"
   },
   "signup": {
     "first_name": "First Name",
@@ -45,6 +47,15 @@
     "deletesuccess": "Address deleted successfully",
     "addsuccess": "Address added successfully",
     "favsuccess": "Address updated successfully"
+  },
+  "locations": {
+    "type1": "Jugendberufshilfen",
+    "type2": "Schulsozialarbeit",
+    "type3": "Kindertageseinrichtungen",
+    "type4": "Schulen",
+    "filter": "Filter Locations",
+    "desc": "Filter locations using four different categories:",
+    "favfaci": "Your favourite facilities"
   },
   "menu": {
     "home": "Map Home",

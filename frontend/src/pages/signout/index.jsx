@@ -1,38 +1,48 @@
 import React, { useEffect } from "react";
 import { LargeText } from "../../styling/common";
-import { getUserData } from "../../localredux/user";
 import withBase from "hocs/base_page";
-import { HomeParent } from "./styles";
+import { Parent } from "./styles";
 import { useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
 import loading from "images/lotties/loading.json";
 import { AnimatePresence } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { t } from "i18next";
+import { useCookies } from "react-cookie";
+import { EMAIL, TOKEN, USERID } from "utils/constants";
 
-function Home() {
+function Signout() {
   const navigation = useNavigate();
   const dispatch = useDispatch();
+  const [cookies, setCookie, removeCookie] = useCookies([
+    "token",
+    "email",
+    "userid",
+  ]);
+
   useEffect(() => {
+    removeCookie(TOKEN, { path: "/", domain: "localhost" });
+    removeCookie(EMAIL, { path: "/", domain: "localhost" });
+    removeCookie(USERID, { path: "/", domain: "localhost" });
     setTimeout(() => {
-      navigation("/signup");
+      navigation("/signin");
     }, 1000);
   });
 
   return (
-    <HomeParent>
+    <Parent>
       <AnimatePresence>
         <LargeText
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-         {t("home.loading")}
+          {t("home.redirecting")}
         </LargeText>
       </AnimatePresence>
       <Lottie animationData={loading} loop={true} />
-    </HomeParent>
+    </Parent>
   );
 }
 
-export default withBase(Home);
+export default withBase(Signout);

@@ -37,6 +37,6 @@ router.post("/users/facilities", verifyJWTToken, addUserFavFacility);
 router.get("/users/facilities", verifyJWTToken, getUserFavFacilities);
 router.delete("/users/facilities", verifyJWTToken, deleteUserFavFacility);
 
-router.delete("/locations", verifyJWTToken, getLocations);
+router.get("/locations", verifyJWTToken, getLocations);
 
 module.exports = router;

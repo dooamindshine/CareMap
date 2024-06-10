@@ -24,6 +24,18 @@ const getUserAddress = async (email, userid, token) => {
     .catch((error) => error.response);
 };
 
+const getLocations = async (email, userid, token, category) => {
+  return requests
+    .get("/api/locations?userid=" + userid + "&" + "category=" + category, {
+      headers: {
+        Authorization: "Bearer " + token,
+        email,
+      },
+    })
+    .then((res) => res)
+    .catch((error) => error.response);
+};
+
 const addUserAddress = async (email, userid, token, data) => {
   return requests
     .post(
@@ -84,9 +96,9 @@ const updateUserAddress = async (email, userid, token, data) => {
     .catch((error) => error.response);
 };
 
-const deleteUserFacility = async (email, userid, token) => {
+const deleteUserFacility = async (email, userid, token, id) => {
   return requests
-    .delete("/api/users/facilities?userid=" + userid, {
+    .delete("/api/users/facilities?userid=" + userid + "&" + "id=" + id, {
       headers: {
         Authorization: "Bearer " + token,
         email,
@@ -163,4 +175,5 @@ export const apis = {
   getUserFacilities,
   deleteUserFacility,
   deleteUserAddress,
+  getLocations,
 };

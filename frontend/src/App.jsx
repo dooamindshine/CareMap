@@ -6,6 +6,8 @@ import Signup from "pages/signup";
 import Maphome from "pages/maphome";
 import Profile from "pages/profile";
 import Addresses from "pages/addresses";
+import Facilitities from "pages/facilities";
+import Signout from "pages/signout";
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
           <Route path="/maphome" element={<Maphome />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/addresses" element={<Addresses />} />
+          <Route path="/facility" element={<Facilitities />} />
+          <Route path="/signout" element={<Signout />} />
         </Routes>
       </Router>
     </>

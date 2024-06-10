@@ -25,7 +25,7 @@ const WhiteHeading = styled(motion.span)`
   }
 `;
 
-const RegularText = styled(motion.span)`
+const RegularText = styled(motion.p)`
   font-family: "Encode Sans Expanded", sans-serif;
   color: ${(props) => props.$color};
   font-size: 16px;
@@ -38,10 +38,22 @@ const XSmallText = styled.div`
   font-size: 8px;
 `;
 
-const SmallText = styled(motion.span)`
-  font-family: "Cormorant Garamond", serif;
+const SmallText = styled(motion.div)`
+  font-family: "Encode Sans Expanded", sans-serif;
   color: 10px;
   font-size: 12px;
+  margin-top: 2px;
+  color: #0D0C1D;
+`;
+
+const SmallTextBold = styled(motion.span)`
+  font-family: "Encode Sans Expanded", sans-serif;
+  color: 10px;
+  font-size: 12px;
+  margin-top: 2px;
+  color: #0D0C1D;
+  font-weight: 600;
+  text-transform: uppercase;
 `;
 
 const LargeText = styled(motion.span)`
@@ -69,4 +81,5 @@ export {
   XLargeText,
   Bold,
   WhiteHeading,
+  SmallTextBold
 };
