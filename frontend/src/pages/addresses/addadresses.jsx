@@ -122,7 +122,7 @@ function AddAdresses() {
   };
 
   const showSuccesFav = () => {
-    toast(t("adressess.favsuccess"));
+    toast(t("addresses.favsuccess"));
   };
 
   const deleteAddressHandle = (event, uuid) => {

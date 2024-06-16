@@ -2,6 +2,7 @@ require("dotenv").config();
 const db = require("../db");
 
 const getUserProfile = async function (req, res) {
+  console.log(req)
   try {
     const { userid } = req.query;
 

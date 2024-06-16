@@ -8,7 +8,7 @@ const getAllDeletedUsers = async function (req, res) {
     if (results) {
       return res
         .status(200)
-        .json({ message: "Delted User Data Fetch successfuly", results });
+        .json({ message: "Deleted User Data Fetch successfuly", results });
     } else {
       return res.status(401).json({ message: "Users not found" });
     }

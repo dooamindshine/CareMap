@@ -19,7 +19,7 @@ const createUser = async function (req, res) {
       birthdate,
       gender,
     } = req.body.user;
-
+    console.log(req.body.user)
     if (!email) return res.status(400).json({ message: "Email is required" });
 
     if (!password)
@@ -64,6 +64,7 @@ const createUser = async function (req, res) {
       return res.status(401).json({ message: "Unable to create user" });
     }
   } catch (error) {
+    console.log(error)
     if (error.errno == 1062) {
       return res
         .status(500)

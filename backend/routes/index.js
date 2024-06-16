@@ -4,7 +4,9 @@ const router = express.Router();
 const signInUser = require("../controllers/signInController");
 const createUser = require("../controllers/userController");
 const deleteUser = require("../controllers/deleteUserController");
+
 const getAllDeletedUsers = require("../controllers/allDeletedUsersController");
+
 const updateUser = require("../controllers/updateUserController");
 const getUserProfile = require("../controllers/profileController");
 const verifyJWTToken = require("../controllers/verifyTokenController");
@@ -15,13 +17,14 @@ const updateUserFavHomes = require("../controllers/updateFavHomeController");
 const deleteUserFavHomes = require("../controllers/deleteFavHomeController");
 
 const getUserFavFacilities = require("../controllers/favFacilitiesController");
+
 const addUserFavFacility = require("../controllers/createFavFacilityController");
 const deleteUserFavFacility = require("../controllers/deleteFavFacilityController");
-
 
 const getLocations = require("../controllers/getLoactions");
 
 router.post("/users", createUser);
+
 router.post("/signin", signInUser);
 router.get("/users", verifyJWTToken, getUserProfile);
 router.delete("/users", verifyJWTToken, deleteUser);
