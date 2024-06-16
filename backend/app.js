@@ -9,6 +9,7 @@ var cron = require("node-cron");
 
 const db = require("./db");
 const seedData = require("./scheduler/seed");
+const monthlySchedule = require("./scheduler/monthlyschedule");
 const allowedOrigins = ["http://localhost:3000", "http://localhost:3001"];
 
 const corsConfigs = {
@@ -32,7 +33,7 @@ app.get("/", (req, res) => {
 app.use("/api", routes);
 
 //every month first day midnight
-//cron.schedule('0 0 1 * *', seedData);
+cron.schedule('0 0 1 * *', monthlySchedule);
 
 //seedData()
 
